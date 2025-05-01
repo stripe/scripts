@@ -1,0 +1,7 @@
+{
+  "extends": ["@stripe-internal/eslint-config-stripe"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "camelcase": 0
+  }
+}

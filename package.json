@@ -1,0 +1,37 @@
+{
+  "name": "@stripe/scripts",
+  "version": "0.0.1",
+  "keywords": [
+    "stripe"
+  ],
+  "author": "Stripe, Inc.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stripe/scripts.git"
+  },
+  "homepage": "https://github.com/stripe/scripts",
+  "license": "MIT",
+  "description": "Stripe Scripts SDK",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "sideEffects": false,
+  "dependencies": {
+    "zod": "^3.22.0"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./discount_calculation": {
+      "types": "./dist/discount_calculation/index.d.ts",
+      "default": "./dist/discount_calculation/index.js"
+    }
+  }
+}

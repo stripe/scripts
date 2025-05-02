@@ -1,6 +1,6 @@
 # Stripe Scripts SDK
 
-## Development Setup
+## Development setup
 
 ### Prerequisites
 
@@ -15,7 +15,7 @@ npm install @stripe/scripts
 
 ## Authoring scripts
 Here is an example script:
-```
+```ts
 import type {
   DiscountCalculationFunction,
   DiscountableItem,

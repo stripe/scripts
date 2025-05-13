@@ -73,7 +73,7 @@ export default percentOffUptoMaxDiscount;
 
 You can explore [the examples package](https://github.com/stripe/scripts/tree/master/examples) for more example scripts as well as explore how you can set up your custom scripts package.
 
-See the [SDK Documentation](https://docs.corp.stripe.com/billing/subscriptions/script-coupons) for more information on how to use the SDK.
+See the [SDK Documentation](https://docs.stripe.com/billing/subscriptions/script-coupons) for more information on how to use the SDK.
 
 ## Packaging
 

@@ -30,6 +30,11 @@ export type PricingScheme = 'PER_UNIT' | 'TIERED';
  * @typedef {('GRADUATED'|'VOLUME')} PricingTierMode
  */
 export type PricingTierMode = 'GRADUATED' | 'VOLUME';
+/**
+ * PriceType enum
+ * @typedef {('ONE_TIME'|'RECURRING')} PriceType
+ */
+export type PriceType = 'ONE_TIME' | 'RECURRING';
 
 /**
  * Customer data structure
@@ -129,18 +134,20 @@ export interface PriceTier {
  * @typedef {Object} Price
  * @property {string} id
  * @property {Product} product
- * @property {RecurringPrice} recurring
+ * @property {RecurringPrice | null} recurring
  * @property {PricingScheme} billing_scheme
- * @property {Array<PriceTier>} tiers
+ * @property {Array<PriceTier> | null} tiers
+ * @property {PriceType} type
  * @property {PricingTierMode | null} tiers_mode
  * @property {Metadata} metadata
  */
 export interface Price {
   id: string;
   product: Product;
-  recurring: RecurringPrice;
+  recurring?: RecurringPrice | null;
   billing_scheme: PricingScheme;
-  tiers: Array<PriceTier>;
+  tiers?: Array<PriceTier> | null;
+  type: PriceType;
   tiers_mode?: PricingTierMode | null;
   metadata: Metadata;
 }
@@ -150,8 +157,6 @@ export interface Price {
  *
  * @typedef {Object} DiscountableLineItem
  * @property {MonetaryAmount} subtotal
- * @property {boolean} is_free_trial
- * @property {boolean} is_recurring
  * @property {string | null} price_id
  * @property {number | null} quantity
  * @property {MonetaryAmount | null} unit_amount
@@ -160,8 +165,6 @@ export interface Price {
  */
 export interface DiscountableLineItem {
   subtotal: MonetaryAmount;
-  is_free_trial: boolean;
-  is_recurring: boolean;
   price_id?: string | null;
   quantity?: number | null;
   unit_amount?: MonetaryAmount | null;

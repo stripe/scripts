@@ -15,8 +15,6 @@ describe('tieredPercentOffDiscountCalculator', () => {
       {
         subtotal: {amount, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount, currency: 'usd'},
         period: {

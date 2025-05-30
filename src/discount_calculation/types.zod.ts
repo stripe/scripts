@@ -33,6 +33,10 @@ export const pricingTierModeSchema = z.union([
   z.literal('GRADUATED'),
   z.literal('VOLUME'),
 ]);
+export const priceTypeSchema = z.union([
+  z.literal('ONE_TIME'),
+  z.literal('RECURRING'),
+]);
 
 export const customerSchema = z.object({
   id: z.string(),
@@ -71,16 +75,15 @@ export const priceTierSchema = z.object({
 export const priceSchema = z.object({
   id: z.string(),
   product: productSchema,
-  recurring: recurringPriceSchema,
+  recurring: recurringPriceSchema.optional(),
   billing_scheme: pricingSchemeSchema,
-  tiers: z.array(priceTierSchema),
+  tiers: z.array(priceTierSchema).optional(),
+  type: priceTypeSchema,
   tiers_mode: pricingTierModeSchema.optional(),
   metadata: metadataSchema,
 });
 export const discountableLineItemSchema = z.object({
   subtotal: monetaryAmountSchema,
-  is_free_trial: z.boolean(),
-  is_recurring: z.boolean(),
   price_id: z.string().optional(),
   quantity: z.number().optional(),
   unit_amount: monetaryAmountSchema.optional(),

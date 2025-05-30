@@ -11,8 +11,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -46,8 +44,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -81,8 +77,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -116,8 +110,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -129,8 +121,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 100, currency: 'usd'},
         price_id: 'price2',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 100, currency: 'usd'},
         period: {
@@ -164,8 +154,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -177,8 +165,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 100, currency: 'usd'},
         price_id: 'price2',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 100, currency: 'usd'},
         period: {
@@ -212,8 +198,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {
@@ -247,8 +231,6 @@ describe('discountCalculatorFunction', () => {
       {
         subtotal: {amount: 300, currency: 'usd'},
         price_id: 'price1',
-        is_free_trial: false,
-        is_recurring: false,
         quantity: 1,
         unit_amount: {amount: 300, currency: 'usd'},
         period: {

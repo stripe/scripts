@@ -140,6 +140,7 @@ export interface PriceTier {
  * @property {PriceType} type
  * @property {PricingTierMode | null} tiers_mode
  * @property {Metadata} metadata
+ * @property {number | null} unit_amount
  */
 export interface Price {
   id: string;
@@ -150,6 +151,7 @@ export interface Price {
   type: PriceType;
   tiers_mode?: PricingTierMode | null;
   metadata: Metadata;
+  unit_amount?: number | null;
 }
 
 /**

@@ -81,6 +81,7 @@ export const priceSchema = z.object({
   type: priceTypeSchema,
   tiers_mode: pricingTierModeSchema.optional(),
   metadata: metadataSchema,
+  unit_amount: z.number().optional(),
 });
 export const discountableLineItemSchema = z.object({
   subtotal: monetaryAmountSchema,

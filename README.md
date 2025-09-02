@@ -7,14 +7,22 @@
 - Node.js (v18.14.0 or higher)
 - npm (v9.3.1 or higher)
 
-### Installation
+### Getting Started
+
+In your project directory, run the following command to install the SDK:
 
 ```bash
 npm install @stripe/scripts
 ```
 
+Import the proper script function signature types into your file and write your custom logic inside of your script function.
+
+
+See the [Stripe Scripts documentation](https://docs.stripe.com/billing/subscriptions/script-coupons#authoring-script-coupon) for more information on how to get started with using the SDK.
+
 ## Authoring scripts
-Here is an example script:
+Here is an example script authored by Stripe:
+
 ```ts
 import type {
   DiscountCalculationFunction,
@@ -71,9 +79,7 @@ export default percentOffUptoMaxDiscount;
 
 ```
 
-You can explore [the examples package](https://github.com/stripe/scripts/tree/master/examples) for more example scripts as well as explore how you can set up your custom scripts package.
-
-See the [SDK Documentation](https://docs.stripe.com/billing/subscriptions/script-coupons) for more information on how to use the SDK.
+You can explore [more examples](https://github.com/stripe/scripts/tree/master/examples) and explore how to write your custom scripts package.
 
 ## Packaging
 

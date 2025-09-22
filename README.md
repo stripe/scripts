@@ -17,12 +17,11 @@ npm install @stripe/scripts
 
 Import the proper script function signature types into your file and write your custom logic inside of your script function.
 
-
 See the [Stripe Scripts documentation](https://docs.stripe.com/billing/subscriptions/script-coupons#authoring-script-coupon) for more information on how to get started with using the SDK.
 
 ## Authoring scripts
-Here is an example script authored by Stripe:
 
+Here is an example script authored by Stripe:
 ```ts
 import type {
   DiscountCalculationFunction,

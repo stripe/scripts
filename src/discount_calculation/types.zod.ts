@@ -3,40 +3,7 @@
  * Any changes to this file will be lost.
  */
 import {z} from 'zod';
-import {metadataSchema, timeRangeSchema, monetaryAmountSchema} from '../types.zod';
-
-export const billingReasonSchema = z.union([
-  z.literal('MANUAL'),
-  z.literal('SUBSCRIPTION_CREATE'),
-  z.literal('SUBSCRIPTION_CYCLE'),
-  z.literal('SUBSCRIPTION_CANCEL'),
-  z.literal('SUBSCRIPTION_THRESHOLD'),
-  z.literal('SUBSCRIPTION_TRIAL_ENDED'),
-  z.literal('SUBSCRIPTION_UPDATE'),
-  z.literal('UPCOMING'),
-]);
-export const recurringPriceIntervalSchema = z.union([
-  z.literal('DAY'),
-  z.literal('WEEK'),
-  z.literal('MONTH'),
-  z.literal('YEAR'),
-]);
-export const usageTypeSchema = z.union([
-  z.literal('LICENSED'),
-  z.literal('METERED'),
-]);
-export const pricingSchemeSchema = z.union([
-  z.literal('PER_UNIT'),
-  z.literal('TIERED'),
-]);
-export const pricingTierModeSchema = z.union([
-  z.literal('GRADUATED'),
-  z.literal('VOLUME'),
-]);
-export const priceTypeSchema = z.union([
-  z.literal('ONE_TIME'),
-  z.literal('RECURRING'),
-]);
+import {metadataSchema, monetaryAmountSchema, anyTimeRangeSchema} from '../types.zod';
 
 export const customerSchema = z.object({
   id: z.string(),
@@ -51,9 +18,8 @@ export const billingCycleAnchorConfigSchema = z.object({
 });
 export const subscriptionSchema = z.object({
   id: z.string(),
-  billing_cycle_anchor: z.number(),
-  billing_cycle_anchor_config: billingCycleAnchorConfigSchema,
-  billing_period: timeRangeSchema,
+  billing_cycle_anchor: z.number().optional(),
+  billing_cycle_anchor_config: billingCycleAnchorConfigSchema.optional(),
   metadata: metadataSchema,
 });
 export const productSchema = z.object({
@@ -61,6 +27,16 @@ export const productSchema = z.object({
   name: z.string(),
   metadata: metadataSchema,
 });
+export const recurringPriceIntervalSchema = z.union([
+  z.literal('DAY'),
+  z.literal('WEEK'),
+  z.literal('MONTH'),
+  z.literal('YEAR'),
+]);
+export const usageTypeSchema = z.union([
+  z.literal('LICENSED'),
+  z.literal('METERED'),
+]);
 export const recurringPriceSchema = z.object({
   interval: recurringPriceIntervalSchema,
   interval_count: z.number(),
@@ -72,25 +48,45 @@ export const priceTierSchema = z.object({
   unit_amount: z.number().optional(),
   up_to: z.number().optional(),
 });
+export const pricingSchemeSchema = z.union([
+  z.literal('PER_UNIT'),
+  z.literal('TIERED'),
+]);
+export const priceTypeSchema = z.union([
+  z.literal('ONE_TIME'),
+  z.literal('RECURRING'),
+]);
+export const pricingTierModeSchema = z.union([
+  z.literal('GRADUATED'),
+  z.literal('VOLUME'),
+]);
 export const priceSchema = z.object({
   id: z.string(),
-  product: productSchema,
+  product: productSchema.optional(),
   recurring: recurringPriceSchema.optional(),
-  billing_scheme: pricingSchemeSchema,
+  billing_scheme: pricingSchemeSchema.optional(),
   tiers: z.array(priceTierSchema).optional(),
-  type: priceTypeSchema,
+  type: priceTypeSchema.optional(),
   tiers_mode: pricingTierModeSchema.optional(),
-  metadata: metadataSchema,
+  metadata: metadataSchema.optional(),
   unit_amount: z.number().optional(),
 });
 export const discountableLineItemSchema = z.object({
   subtotal: monetaryAmountSchema,
-  price_id: z.string().optional(),
   quantity: z.number().optional(),
-  unit_amount: monetaryAmountSchema.optional(),
-  period: timeRangeSchema,
+  period: anyTimeRangeSchema,
   price: priceSchema.optional(),
 });
+export const billingReasonSchema = z.union([
+  z.literal('MANUAL'),
+  z.literal('SUBSCRIPTION_CREATE'),
+  z.literal('SUBSCRIPTION_CYCLE'),
+  z.literal('SUBSCRIPTION_CANCEL'),
+  z.literal('SUBSCRIPTION_THRESHOLD'),
+  z.literal('SUBSCRIPTION_TRIAL_ENDED'),
+  z.literal('SUBSCRIPTION_UPDATE'),
+  z.literal('UPCOMING'),
+]);
 export const discountableItemSchema = z.object({
   line_items: z.array(discountableLineItemSchema),
   gross_amount: monetaryAmountSchema,

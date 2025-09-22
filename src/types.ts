@@ -1,22 +1,35 @@
 /**
+ * Represents a one-time event occurring at a specific date.
+ *
+ * @typedef {Object} OneTime
+ * @property {'one_time'} type - The type identifier for a one-time event
+ * @property {Date} at - The date and time of the event
+ */
+export type OneTime = {
+  type: 'one_time';
+  at: Date;
+};
+
+/**
  * Represents a time period with start and end dates
  *
  * @typedef {Object} TimeRange
- * @property {'one_time' | 'time_range'} type - The type of the range
- * @property {Date} at - The date for one_time type
+ * @property {'time_range'} type - The type identifier for a time range
  * @property {Date} start_date - The beginning date of the range
  * @property {Date | null} end_date - The ending date of the range
  */
-export type TimeRange =
-  | {
-      type: 'one_time';
-      at: Date;
-    }
-  | {
-      type: 'time_range';
-      start_date: Date;
-      end_date: Date | null;
-    };
+export type TimeRange = {
+  type: 'time_range';
+  start_date: Date;
+  end_date: Date | null;
+};
+
+/**
+ * Represents a value that can be either a one-time event or a time range.
+ *
+ * @typedef {OneTime | TimeRange} AnyTimeRange
+ */
+export type AnyTimeRange = OneTime | TimeRange;
 
 /**
  * Represents a supported currency code

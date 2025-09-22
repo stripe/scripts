@@ -6,7 +6,7 @@ import {DiscountableItem, DiscountResult} from './types';
  */
 
 /**
- * Represents a DiscountCalculation function definition
+ * Represents a DiscountCalculation function definition (LEGACY - use ComputeDiscountsFunctionDefinition)
  *
  * This slug is used to generate JSON schema for validation purposes
  */
@@ -18,7 +18,7 @@ export type DiscountCalculationFunctionDefinition = {
 };
 
 /**
- * DiscountCalculation function
+ * DiscountCalculation function (LEGACY - use ComputeDiscountsFunction)
  *
  * @template C - The type of the function configuration
  * @param {C} configuration - Custom configuration data passed to the function
@@ -29,3 +29,64 @@ export type DiscountCalculationFunction<C> = (
   configuration: C,
   discountable_item: DiscountableItem,
 ) => DiscountResult;
+
+/**
+ * Represents a computeDiscounts function definition
+ *
+ * This slug is used to generate JSON schema for validation purposes
+ */
+export type ComputeDiscountsFunctionDefinition = {
+  args: {
+    discountable_item: DiscountableItem;
+  };
+  returns: DiscountResult;
+};
+
+/**
+ * computeDiscounts function
+ *
+ * @template C - The type of the function configuration
+ * @param {C} configuration - Custom configuration data passed to the function
+ * @param {DiscountableItem} discountable_item - discountable_item
+ * @returns {DiscountResult} - computeDiscounts result
+ */
+export type ComputeDiscountsFunction<C> = (
+  configuration: C,
+  discountable_item: DiscountableItem,
+) => DiscountResult;
+
+/**
+ * DiscountCalculation definition type (LEGACY - use DiscountCalculationMethodDefinition)
+ *
+ * Slug for DiscountCalculation method definitions to help generate JSON schema
+ */
+export type DiscountCalculationDefinition = {
+  computeDiscounts: DiscountCalculationFunctionDefinition;
+};
+
+/**
+ * DiscountCalculation definition type using method-based naming
+ *
+ * Slug for DiscountCalculation method definitions to help generate JSON schema
+ */
+export type DiscountCalculationMethodDefinition = {
+  computeDiscounts: ComputeDiscountsFunctionDefinition;
+};
+
+/**
+ * DiscountCalculation interface (LEGACY - use DiscountCalculationMethods)
+ *
+ * @template C - The type of the function configuration
+ */
+export interface DiscountCalculation<C> {
+  computeDiscounts: DiscountCalculationFunction<C>;
+}
+
+/**
+ * DiscountCalculation interface using method-based naming
+ *
+ * @template C - The type of the function configuration
+ */
+export interface DiscountCalculationMethods<C> {
+  computeDiscounts: ComputeDiscountsFunction<C>;
+}

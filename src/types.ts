@@ -91,3 +91,17 @@ export type Decimal = string;
 export interface Metadata {
   [k: string]: string;
 }
+
+/**
+ * Represents the context of a script execution
+ *
+ * @typedef {Object} RunContext
+ * @property {string} account_id - The account ID
+ * @property {boolean} livemode - Whether the account is in livemode
+ * @property {Date} clock_time - The clock time
+ */
+export interface RunContext {
+  account_id: string;
+  livemode: boolean;
+  clock_time: Date;
+}

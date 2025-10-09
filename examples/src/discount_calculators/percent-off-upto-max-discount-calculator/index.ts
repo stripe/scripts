@@ -1,5 +1,5 @@
 import type {
-  DiscountCalculationFunction,
+  ComputeDiscountsFunction,
   DiscountableItem,
   DiscountResult,
 } from '@stripe/scripts/discount_calculation';
@@ -21,7 +21,7 @@ export type DiscountCalculatorConfiguration = {
  * @param {DiscountableItem} item - The items to apply discounts to
  * @returns {DiscountResult} - The discounts applied to the items
  */
-const percentOffUptoMaxDiscount: DiscountCalculationFunction<
+const percentOffUptoMaxDiscount: ComputeDiscountsFunction<
   DiscountCalculatorConfiguration
 > = (
   config: DiscountCalculatorConfiguration,

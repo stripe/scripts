@@ -1,12 +1,12 @@
 {
   "name": "@stripe/scripts-examples",
-  "version": "1.2.0-prerelease",
+  "version": "2.0.0-prerelease",
   "sideEffects": false,
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
-    "@stripe/scripts": "1.2.0-prerelease"
+    "@stripe/scripts": "2.0.0-prerelease"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

@@ -1,7 +1,14 @@
 import type {DiscountableLineItem} from '@stripe/scripts/discount_calculation';
-import tieredPercentOffDiscountCalculator from './index';
+import type {RunContext} from '@stripe/scripts';
+import computeTieredPercentOffDiscountCalculator from './index';
 
 describe('tieredPercentOffDiscountCalculator', () => {
+  const mockContext: RunContext = {
+    account_id: 'acct_test123',
+    livemode: false,
+    clock_time: new Date('2023-01-01T00:00:00Z'),
+  };
+
   const configuration = {
     currency: 'usd',
     tier_1_minimum_spend_amount: 100,
@@ -14,9 +21,7 @@ describe('tieredPercentOffDiscountCalculator', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -34,7 +39,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
   it('should apply 0 when you spend less than tier 1 minimum', () => {
     const discountableItem = createDiscountableItemWithAmount(50);
 
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       configuration,
       discountableItem,
     );
@@ -52,7 +58,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
       line_items: [],
     };
 
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       configuration,
       discountableItem,
     );
@@ -66,7 +73,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
 
   it('should apply 10% when you spend between tier 1 and tier 2 minimum', () => {
     const discountableItem = createDiscountableItemWithAmount(150);
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       configuration,
       discountableItem,
     );
@@ -80,7 +88,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
 
   it('should apply 20% when you spend above tier 2', () => {
     const discountableItem = createDiscountableItemWithAmount(250);
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       configuration,
       discountableItem,
     );
@@ -98,7 +107,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
       ...configuration,
       currency: 'cad',
     };
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       cadConfiguration,
       discountableItem,
     );
@@ -116,7 +126,8 @@ describe('tieredPercentOffDiscountCalculator', () => {
       ...configuration,
       currency: 'USD',
     };
-    const result = tieredPercentOffDiscountCalculator(
+    const result = computeTieredPercentOffDiscountCalculator.computeDiscounts(
+      mockContext,
       usdConfiguration,
       discountableItem,
     );

@@ -2,7 +2,10 @@ import type {
   ComputeDiscountsFunction,
   DiscountableItem,
   DiscountResult,
+  DiscountCalculation,
 } from '@stripe/scripts/discount_calculation';
+
+import type {RunContext} from '@stripe/scripts';
 
 /**
  * Configuration for the discount calculator function
@@ -26,8 +29,9 @@ export type TieredPercentOffDiscountConfiguration = {
 const tieredPercentOffDiscountCalculator: ComputeDiscountsFunction<
   TieredPercentOffDiscountConfiguration
 > = (
+  context: RunContext,
   configuration: TieredPercentOffDiscountConfiguration,
-  item: DiscountableItem,
+  discountable_item: DiscountableItem,
 ): DiscountResult => {
   const {
     currency,
@@ -39,10 +43,10 @@ const tieredPercentOffDiscountCalculator: ComputeDiscountsFunction<
   let discountAmount = 0;
   let discountPercent = 0;
 
-  const invoiceTotal = item.gross_amount.amount;
+  const invoiceTotal = discountable_item.gross_amount.amount;
 
   if (
-    item.gross_amount.currency.toLowerCase().trim() ===
+    discountable_item.gross_amount.currency.toLowerCase().trim() ===
     currency.toLowerCase().trim()
   ) {
     // Get discount percent based on gross amount
@@ -64,10 +68,15 @@ const tieredPercentOffDiscountCalculator: ComputeDiscountsFunction<
     discount: {
       amount: {
         amount: discountAmount,
-        currency: item.gross_amount.currency,
+        currency: discountable_item.gross_amount.currency,
       },
     },
   };
 };
 
-export default tieredPercentOffDiscountCalculator;
+const computeTieredPercentOffDiscountCalculator: DiscountCalculation<TieredPercentOffDiscountConfiguration> =
+  {
+    computeDiscounts: tieredPercentOffDiscountCalculator,
+  };
+
+export default computeTieredPercentOffDiscountCalculator;

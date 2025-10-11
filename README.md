@@ -26,10 +26,15 @@ Here is an example script authored by Stripe:
 import type {
   ComputeDiscountsFunction,
   DiscountableItem,
+  DiscountCalculation,
   DiscountResult,
 } from '@stripe/scripts/discount_calculation';
 
-import type {PositiveMonetaryAmount, Percent} from '@stripe/scripts';
+import type {
+  PositiveMonetaryAmount,
+  Percent,
+  RunContext,
+} from '@stripe/scripts';
 
 /**
  * Configuration for the discount calculator function
@@ -49,18 +54,19 @@ export type DiscountCalculatorConfiguration = {
 const percentOffUptoMaxDiscount: ComputeDiscountsFunction<
   DiscountCalculatorConfiguration
 > = (
+  context: RunContext,
   config: DiscountCalculatorConfiguration,
-  item: DiscountableItem,
+  discountable_item: DiscountableItem,
 ): DiscountResult => {
   const {max_discount_amount, discount_percent} = config;
   let discountAmount = 0;
 
   if (
-    item.gross_amount.currency.toLowerCase().trim() ===
+    discountable_item.gross_amount.currency.toLowerCase().trim() ===
     max_discount_amount.currency.toLowerCase().trim()
   ) {
     const discountAmountValue =
-      (item.gross_amount.amount * discount_percent) / 100;
+      (discountable_item.gross_amount.amount * discount_percent) / 100;
     discountAmount = Math.min(discountAmountValue, max_discount_amount.amount);
   }
 
@@ -68,13 +74,18 @@ const percentOffUptoMaxDiscount: ComputeDiscountsFunction<
     discount: {
       amount: {
         amount: discountAmount,
-        currency: item.gross_amount.currency,
+        currency: discountable_item.gross_amount.currency,
       },
     },
   };
 };
 
-export default percentOffUptoMaxDiscount;
+const computePercentOffUptoMaxDiscount: DiscountCalculation<DiscountCalculatorConfiguration> =
+  {
+    computeDiscounts: percentOffUptoMaxDiscount,
+  };
+
+export default computePercentOffUptoMaxDiscount;
 
 ```
 

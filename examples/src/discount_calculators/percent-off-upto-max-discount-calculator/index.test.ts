@@ -1,7 +1,14 @@
 import type {DiscountableLineItem} from '@stripe/scripts/discount_calculation';
-import discountCalculatorFunction from './index';
+import type {RunContext} from '@stripe/scripts';
+import computePercentOffUptoMaxDiscount from './index';
 
 describe('discountCalculatorFunction', () => {
+  const mockContext: RunContext = {
+    account_id: 'acct_test123',
+    livemode: false,
+    clock_time: new Date('2023-01-01T00:00:00Z'),
+  };
+
   it('should apply the correct discount when discount amount is less than max discount amount', () => {
     const config = {
       max_discount_amount: {amount: 50, currency: 'usd'},
@@ -10,9 +17,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -26,7 +31,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -43,9 +52,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -59,7 +66,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -76,9 +87,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -92,7 +101,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -109,9 +122,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -120,9 +131,7 @@ describe('discountCalculatorFunction', () => {
       },
       {
         subtotal: {amount: 100, currency: 'usd'},
-        price_id: 'price2',
         quantity: 1,
-        unit_amount: {amount: 100, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -136,7 +145,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -153,9 +166,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -164,9 +175,7 @@ describe('discountCalculatorFunction', () => {
       },
       {
         subtotal: {amount: 100, currency: 'usd'},
-        price_id: 'price2',
         quantity: 1,
-        unit_amount: {amount: 100, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -180,7 +189,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -197,9 +210,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -213,7 +224,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -230,9 +245,7 @@ describe('discountCalculatorFunction', () => {
     const discountableLineItems: Array<DiscountableLineItem> = [
       {
         subtotal: {amount: 300, currency: 'usd'},
-        price_id: 'price1',
         quantity: 1,
-        unit_amount: {amount: 300, currency: 'usd'},
         period: {
           type: 'time_range',
           start_date: new Date('2023-01-01T00:00:00Z'),
@@ -246,7 +259,11 @@ describe('discountCalculatorFunction', () => {
       line_items: discountableLineItems,
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {
@@ -266,7 +283,11 @@ describe('discountCalculatorFunction', () => {
       line_items: [],
     };
 
-    const result = discountCalculatorFunction(config, discountableItem);
+    const result = computePercentOffUptoMaxDiscount.computeDiscounts(
+      mockContext,
+      config,
+      discountableItem,
+    );
 
     expect(result).toEqual({
       discount: {

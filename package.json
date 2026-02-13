@@ -1,6 +1,6 @@
 {
   "name": "@stripe/scripts",
-  "version": "2.1.1",
+  "version": "3.0.0-alpha",
   "keywords": [
     "stripe"
   ],
@@ -29,9 +29,21 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./bill_routing": {
+      "types": "./dist/bill_routing/index.d.ts",
+      "default": "./dist/bill_routing/index.js"
+    },
+    "./customer_balance_application": {
+      "types": "./dist/customer_balance_application/index.d.ts",
+      "default": "./dist/customer_balance_application/index.js"
+    },
     "./discount_calculation": {
       "types": "./dist/discount_calculation/index.d.ts",
       "default": "./dist/discount_calculation/index.js"
+    },
+    "./prorations": {
+      "types": "./dist/prorations/index.d.ts",
+      "default": "./dist/prorations/index.js"
     }
   }
 }

@@ -9,7 +9,7 @@ export const oneTimeSchema = z.object({
 export const timeRangeSchema = z.object({
   type: z.literal('time_range'),
   start_date: z.date(),
-  end_date: z.date().nullable(),
+  end_date: z.date(),
 });
 
 export const anyTimeRangeSchema = z.union([oneTimeSchema, timeRangeSchema]);

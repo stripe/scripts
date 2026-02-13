@@ -16,12 +16,12 @@ export type OneTime = {
  * @typedef {Object} TimeRange
  * @property {'time_range'} type - The type identifier for a time range
  * @property {Date} start_date - The beginning date of the range
- * @property {Date | null} end_date - The ending date of the range
+ * @property {Date} end_date - The ending date of the range
  */
 export type TimeRange = {
   type: 'time_range';
   start_date: Date;
-  end_date: Date | null;
+  end_date: Date;
 };
 
 /**

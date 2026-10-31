@@ -22,7 +22,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "zod": "^3.22.0"
+    "zod": "^4.6.6"
   },
   "exports": {
     ".": {
